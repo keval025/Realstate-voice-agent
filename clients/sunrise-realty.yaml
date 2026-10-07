@@ -1,0 +1,55 @@
+# One file per client. Copy this file, rename it, and edit the values.
+# Files starting with "_" are ignored.
+
+id: sunrise-realty                      # short unique id, no spaces
+business_name: Sunrise Realty Group
+agent_name: Ava                         # the AI receptionist's name
+team_member_name: Mike                  # who the caller will meet / be called back by
+
+# The Twilio number(s) that ring this client's AI. Must match the number in Twilio.
+phone_numbers:
+  - "+15125550123"
+
+timezone: America/Chicago               # IANA name: America/New_York, America/Denver, America/Los_Angeles...
+service_areas: [Austin, Round Rock, Cedar Park, Georgetown, Pflugerville, Leander]
+
+# When a human can take a live transfer. Use 24h "HH:MM-HH:MM", or null for closed.
+business_hours:
+  mon: "09:00-18:00"
+  tue: "09:00-18:00"
+  wed: "09:00-18:00"
+  thu: "09:00-18:00"
+  fri: "09:00-18:00"
+  sat: "10:00-15:00"
+  sun: null
+
+transfer_number: "+15125550199"         # live transfers + fallback if the AI is unavailable. "" to disable.
+
+# Text-message alerts for new leads (requires A2P 10DLC registration in Twilio, see README).
+alert_sms_numbers: ["+15125550199"]
+alert_min_tier: warm                    # hot | warm | cold  (booked appointments always alert)
+
+record_calls: true                      # the greeting tells callers the call may be recorded
+voice_id: ""                            # Cartesia voice id; empty = default voice
+
+calendar:
+  provider: calcom                      # remove this block to turn booking off (callback mode)
+  event_type_id: 1234567                # Cal.com > Event Types > open event > id in the URL
+  api_key_env: CALCOM_API_KEY_SUNRISE   # name of the env var holding this client's Cal.com API key
+  appointment_label: "a free 15 minute consultation call"
+  min_notice_hours: 2
+
+# Every finished call is POSTed here as JSON (Zapier / Make / GoHighLevel / Follow Up Boss via Zapier).
+crm_webhook_url: ""
+
+# Facts the AI may use. Keep it short and factual. Anything not here, the AI defers to the agent.
+knowledge: |
+  Office: 1200 Congress Ave, Suite 300, Austin TX 78701.
+  We help buyers and sellers across Central Texas, including first-time buyers, relocations and new construction.
+  Buyer consultations are free. We can recommend local lenders if the caller isn't pre-approved.
+  Website: sunriserealty.example.com
+
+# Client's own login to the dashboard (sees only their leads).
+# Generate the hash with:  python scripts/hash_password.py "their-password"
+dashboard_username: sunrise
+dashboard_password_hash: ""

@@ -1,0 +1,10 @@
+services:
+  agent:
+    build: .
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/srv/data          # database lives here: back it up
+      - ./clients:/srv/clients    # edit client YAMLs without rebuilding
+    restart: unless-stopped
